@@ -1,11 +1,11 @@
 //importing the express
 var express = require("express");
-const connect = require();
+const connectToMongo = require('./database');
 const cors = require("cors");
 
 const app = express();
 const port = process.env.PORT || 5000;
-
+connectToMongo();
 app.use(cors());
 
 app.use(express.json());

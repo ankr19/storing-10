@@ -11,9 +11,10 @@ app.use(cors());
 app.use(express.json());
 
 // given the api storing location
-app.use("/edModule",)
+// endpoint is http://localhost:5000/module/dbdata
+app.use("/module",require('./routes/rddata'))
 
 // running the port on the server
 app.listen(port, () => {
-  console.log(`app runnning on port ${port}`);
+  console.log(`app runnning on port http://localhost:${port}`);
 });

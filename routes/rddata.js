@@ -17,12 +17,23 @@ router.post("/dbdata", async (req, res) => {
   const { simnumber, rd } = req.body;
   // storing the data
   try {
+    // if there is data which is present then we have to just update the value
+    const present = await dbmodel.findOne({simnumber}).exec();
+    if(present){
+      const value = await dbmodel.findOneAndUpdate(
+        {simnumber:simnumber},
+        {$push: {rd:[rd]}}
+      );
+      res.status(200).send(value);
+    }
+    // if there the data is not present then new can simply insert the new one
+    else{
     const model = new dbmodel({
       simnumber,
-      rd
+      rd: [rd]
     });
     const savemodel = await model.save();
-    res.json(savemodel);
+    res.json(savemodel);}
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }

@@ -1,6 +1,6 @@
 //importing the express
 var express = require("express");
-const connectToMongo = require('./database/db');
+const connectToMongo = require("./database/db");
 const cors = require("cors");
 
 const app = express();
@@ -12,7 +12,7 @@ app.use(express.json());
 
 // given the api storing location
 // endpoint is http://localhost:5000/module/dbdata
-app.use("/module",require('./routes/rddata'))
+app.use("/module", require("./routes/rddata"));
 
 // running the port on the server
 app.listen(port, () => {

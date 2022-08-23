@@ -21,7 +21,7 @@ router.post("/dbdata", async (req, res) => {
     // if there the data is not present then new can simply insert the new one
       const model = new dbmodel({
         timestamp: Date.now(),
-        simnumber,
+        simnumber: simnumber,
         rd:[rd]
       });
       const savemodel = await model.save();
@@ -33,9 +33,16 @@ router.post("/dbdata", async (req, res) => {
 });
 
 // now getting all the store data from server
-router.post("/getDBdata",async(req, res)=>{
-  const dbdata = await dbmodel.find({simnumber})
-  
+router.post("/getdbdata",async(req, res)=>{
+  const {simnumber} = req.body;
+  try{
+    let value=await dbmodel.find({simnumber:simnumber});
+    res.status(200).send(value);
+  }
+  catch(error){
+    console.log(error.message);
+    res.status(500).send("internal server error");
+  }
 })
 
 module.exports = router;

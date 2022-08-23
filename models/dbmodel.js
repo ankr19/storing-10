@@ -1,16 +1,18 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
+const dataSchema = new Schema({
+    timestamp:{
+        type:Date,
+        default:Date.now()
+    },
+    simnumber:{
+        type: String,
+    },
+    rd:Array
+});
 
 const DBModelSchema = new Schema({
-    timestamp: {
-        type: Date,
-        required: Date.now
-    },
-    simnumber: {
-        type: String,
-        required: true
-    },
-    rd : [Array]
+    data:[dataSchema]
 });
 
 const dbmodel = mongoose.model('dbmodel',DBModelSchema);

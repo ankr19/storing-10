@@ -1,6 +1,6 @@
 //importing the express
 var express = require("express");
-const connectToMongo = require('./database');
+const connectToMongo = require('./database/db');
 const cors = require("cors");
 
 const app = express();

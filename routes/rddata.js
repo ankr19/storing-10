@@ -14,29 +14,28 @@ router.post("/dbdata", async (req, res) => {
   }
 
   // extracting the data from request
-  const { data } = req.body;
+  const { simnumber,rd } = req.body;
   // storing the data
   try {
     // if there is data which is present then we have to just update the value
-    const present = await dbmodel.findOne({ data }).exec();
-    if (present) {
-      const value = await dbmodel.findOneAndUpdate(
-        { $push: { data:data } }
-      );
-      res.status(200).send(value);
-    }
     // if there the data is not present then new can simply insert the new one
-    else {
       const model = new dbmodel({
-        data
+        timestamp: Date.now(),
+        simnumber,
+        rd:[rd]
       });
       const savemodel = await model.save();
       res.json(savemodel);
-    }
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
   }
 });
+
+// now getting all the store data from server
+router.post("/getDBdata",async(req, res)=>{
+  const dbdata = await dbmodel.find({simnumber})
+  
+})
 
 module.exports = router;

@@ -3,19 +3,16 @@ const {Schema} = mongoose;
 const dataSchema = new Schema({
     timestamp:{
         type:Date,
-        default:Date.now()
+        required:true
     },
     simnumber:{
         type: String,
+        required:true
     },
     rd:Array
 });
 
-const DBModelSchema = new Schema({
-    data:[dataSchema]
-});
-
-const dbmodel = mongoose.model('dbmodel',DBModelSchema);
+const dbmodel = mongoose.model('dbmodel',dataSchema);
 
 dbmodel.createIndexes();
 

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="handleClick">Click me</button>
+</body>
+<script>
+    async function handle() {
+        const response = fetch("http://localhost:5000/module/rdata", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ data: [23, 232, 355, 232, 4534, 6767] }),
+        });
+        const json = await response.json();
+    }
+
+    async function handleClick(){
+        let i=0;
+        while(i<=5){
+            handle();
+        }
+    }
+</script>
+
+</html>

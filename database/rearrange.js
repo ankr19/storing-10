@@ -78,7 +78,6 @@ const arrange = async () => {
 
         const main = new refine({ data: obj });
         const savem = await main.save();
-        // console.log(savem);
       }
     }
   } catch (error) {

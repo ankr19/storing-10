@@ -4,10 +4,8 @@ const connectToMongo = require("./database/db");
 const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 5000;
-
 connectToMongo();
 app.use(cors());
-
 app.use(express.json());
 
 // given the api storing location

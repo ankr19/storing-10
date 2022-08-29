@@ -62,10 +62,12 @@ router.post("/rdata", async (req, res) => {
     });
     const savem = await model.save();
     res.status(200).send(savem);
-    rearrange();
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
+  }
+  finally{
+    rearrange();
   }
 });
 

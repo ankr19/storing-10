@@ -62,48 +62,48 @@ const arrange = async () => {
     );
   }
   try {
-    console.log(tesc[0].length);
-    console.log(idc[0].length);
-    for (let i = 0; i < date[0].length - 1; i++) {
-      repeat2(date);
-      repeat2(time);
-      p++;
+    if (data.length != 0) {
+      // console.log(tesc[0].length);
+      // console.log(idc[0].length);
+      for (let i = 0; i < date[0].length - 1; i++) {
+        repeat2(date);
+        repeat2(time);
+        p++;
 
-      repeat(vdc, idc, rpm, idref, tmot, tesc);
-      if (a == 10) {
-        a = 0;
-        c = b + 10;
+        repeat(vdc, idc, rpm, idref, tmot, tesc);
+
+        obj = new Object(obj);
+        // console.log(obj);
+        // console.log(data)
+
+        const main = new refine({ data: obj });
+        const savem = await main.save();
+        // console.log(savem);
       }
-      obj = new Object(obj);
-      console.log(obj.tesc10);
-
-      const main = new refine({ data: obj });
-      const savem = await main.save();
-      // console.log(savem);
     }
   } catch (error) {
     console.log(error);
   }
 };
 
-const repeat = (vdc, idc, rpm, idref,tmot, tesc) => {
-  // console.log(vdc[0].length);
-  for (let i = b; i < c-2 ; i++) {
+const repeat = (vdc, idc, rpm, idref, tmot, tesc) => {
+  for (let i = b; i < c; i++, a++) {
     obj[vdc[0][a]] = vdc[0][i];
     obj[idc[0][a]] = idc[0][i];
     obj[rpm[0][a]] = rpm[0][i];
     obj[idref[0][a]] = idref[0][i];
-    obj[tesc[0][a]] = tesc[0][i];
     obj[tmot[0][a]] = tmot[0][i];
-    
-    a++;
-
-    //
-
-    //
+    obj[tesc[0][a]] = tesc[0][i];
   }
-  // console.log(a);console.log(b);console.log(c);
+
   b += 10;
+  c = b + 10;
+  if (a === 10) {
+    a = 0;
+  }
+  // console.log(a);
+  // console.log(b);
+  // console.log(c);
 };
 
 const repeat2 = (dt) => {

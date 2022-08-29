@@ -71,4 +71,15 @@ router.post("/rdata", async (req, res) => {
   }
 });
 
+router.post("/getAll", async (req, res)=>{
+  try{
+    const model = await model2.find({});
+    res.status(200).send(model);
+  }
+  catch(error){
+    console.log(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+})
+
 module.exports = router;

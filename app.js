@@ -16,4 +16,3 @@ app.use("/module", require("./routes/rddata"));
 app.listen(port, () => {
   console.log(`app runnning on port http://localhost:${port}`);
 });
-

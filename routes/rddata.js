@@ -46,7 +46,7 @@ router.post("/getdbdata", async (req, res) => {
   }
 });
 
-// storing the data in row and columns of the all
+// storing the data in row and columns of the all getting from json
 router.post("/rdata", async (req, res) => {
   const { Date, Time, vdc, idc, rpm, idref, tmot, tesc } = req.body;
   try {
@@ -67,10 +67,12 @@ router.post("/rdata", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
   finally{
+    // after getting the data we are rearrange the values 
     rearrange();
   }
 });
 
+// we are getting all the data to show from mongodb
 router.post("/getAll", async (req, res)=>{
   try{
     const model = await model2.find({});

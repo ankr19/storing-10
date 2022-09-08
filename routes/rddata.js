@@ -3,6 +3,7 @@ const { validationResult } = require("express-validator");
 const rearrange = require("../database/rearrange");
 const dbmodel = require("../models/dbmodel");
 const model2 = require("../models/model2");
+const refine = require("../models/refine");
 
 const router = express.Router();
 
@@ -34,6 +35,7 @@ router.post("/dbdata", async (req, res) => {
   }
 });
 
+// router 2
 // now getting all the store data from server
 router.post("/getdbdata", async (req, res) => {
   const { simnumber } = req.body;
@@ -46,9 +48,11 @@ router.post("/getdbdata", async (req, res) => {
   }
 });
 
+// router 3
 // storing the data in row and columns of the all getting from json
 router.post("/rdata", async (req, res) => {
   const { Date, Time, vdc, idc, rpm, idref, tmot, tesc } = req.body;
+  console.log(req.body);
   try {
     const model = new model2({
       Date: Date,
@@ -72,10 +76,12 @@ router.post("/rdata", async (req, res) => {
   }
 });
 
+
+//router 4
 // we are getting all the data to show from mongodb
 router.post("/getAll", async (req, res)=>{
   try{
-    const model = await model2.find({});
+    const model = await refine.find({});
     res.status(200).send(model);
   }
   catch(error){

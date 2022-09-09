@@ -2,10 +2,10 @@ const connectToMongo = require("./db");
 const model2 = require("../models/model2");
 const refine = require("../models/refine");
 var obj = {};
-var a = 0,
-  b = 10,
-  c = b + 10,
-  p = 1;
+var a = 0;
+var b = 10;
+var  c = b + 10;
+var p = 1;
 const arrange = async () => {
   connectToMongo();
   //model2.fin
@@ -60,9 +60,9 @@ const arrange = async () => {
         return e;
       })
     );
+    console.log(date)
   }
   try {
-    if (data.length != 0) {
       // console.log(tesc[0].length);
       // console.log(idc[0].length);
       for (let i = 0; i < date[0].length - 1; i++) {
@@ -78,10 +78,17 @@ const arrange = async () => {
 
         const main = new refine({ data: obj });
         const savem = await main.save();
+        console.log(savem);
       }
-    }
   } catch (error) {
     console.log(error);
+  }
+  finally{
+    obj = new Object({});
+    a = 0;
+    b = 10;
+    c = b + 10;
+    p = 1;
   }
 };
 

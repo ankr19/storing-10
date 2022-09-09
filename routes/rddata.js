@@ -52,7 +52,6 @@ router.post("/getdbdata", async (req, res) => {
 // storing the data in row and columns of the all getting from json
 router.post("/rdata", async (req, res) => {
   const { Date, Time, vdc, idc, rpm, idref, tmot, tesc } = req.body;
-  console.log(req.body);
   try {
     const model = new model2({
       Date: Date,
@@ -66,13 +65,12 @@ router.post("/rdata", async (req, res) => {
     });
     const savem = await model.save();
     res.status(200).send(savem);
+    if(savem){
+      rearrange();
+    }
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
-  }
-  finally{
-    // after getting the data we are rearrange the values 
-    rearrange();
   }
 });
 

@@ -2,10 +2,10 @@ const connectToMongo = require("./db");
 const model2 = require("../models/model2");
 const refine = require("../models/refine");
 var obj = {};
-var a = 0;
-var b = 10;
-var  c = b + 10;
-var p = 1;
+var a = 1;
+var b = 0;
+var  c = 10;
+var p = 0;
 const arrange = async () => {
   connectToMongo();
   //model2.fin
@@ -65,9 +65,9 @@ const arrange = async () => {
   try {
       // console.log(tesc[0].length);
       // console.log(idc[0].length);
-      for (let i = 0; i < date[0].length - 1; i++) {
-        repeat2(date);
-        repeat2(time);
+      for (let i = 0; i < date[0].length ; i++) {
+        Date(date);
+        Time(time);
         p++;
 
         repeat(vdc, idc, rpm, idref, tmot, tesc);
@@ -85,36 +85,46 @@ const arrange = async () => {
   }
   finally{
     obj = new Object({});
-    a = 0;
-    b = 10;
-    c = b + 10;
-    p = 1;
+    a = 1;
+    b = 0;
+    c = 10;
+    p = 0;
   }
 };
 
 const repeat = (vdc, idc, rpm, idref, tmot, tesc) => {
   for (let i = b; i < c; i++, a++) {
-    obj[vdc[0][a]] = vdc[0][i];
-    obj[idc[0][a]] = idc[0][i];
-    obj[rpm[0][a]] = rpm[0][i];
-    obj[idref[0][a]] = idref[0][i];
-    obj[tmot[0][a]] = tmot[0][i];
-    obj[tesc[0][a]] = tesc[0][i];
+    obj["vdc"+a] = vdc[0][i];
+    obj["idc"+a] = idc[0][i];
+    obj["rpm"+a] = rpm[0][i];
+    obj["idref"+a] = idref[0][i];
+    obj["tmot"+a] = tmot[0][i];
+    obj["tesc"+a] = tesc[0][i];
   }
+  // console.log("before");
+  // console.log(a);
+  // console.log(b);
+  // console.log(c);
 
-  b += 10;
-  c = b + 10;
-  if (a === 10) {
-    a = 0;
+  
+  if (a === 11) {
+    a = 1;b += 10;
+  c += 10;
   }
+  // console.log('after')
   // console.log(a);
   // console.log(b);
   // console.log(c);
 };
 
-const repeat2 = (dt) => {
+const Date = (dt) => {
   for (let i in dt) {
-    obj[dt[0][0]] = dt[0][p];
+    obj["Date"] = dt[0][p];
+  }
+};
+const Time = (dt) => {
+  for (let i in dt) {
+    obj["Time"] = dt[0][p];
   }
 };
 
